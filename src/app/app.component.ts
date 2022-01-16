@@ -21,7 +21,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
 
   dummyText: string = 'Hello, we work at Mable.';
 
-  data: { index: number, text: string}[] = [];
+  data: { index: number, text: string }[] = [];
   dataLoaded: boolean = false;
 
   ngOnInit(): void {
@@ -32,7 +32,7 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log('virtual scroll', this.agVirtualScroll);
     console.log('cdkViewport', this.cdkViewport);
     console.log('UiScrollDirective', this.ngxUiScroll);
-    
+
     this.cdkVirtualExperimentalHandler();
     this.ngxUiScrollHandler();
   }
@@ -67,14 +67,14 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   agVirtualScrollInitialized: boolean = false;
   onAgScroll_itemsRender(event: any) {
     // console.log(`items rendered: from ${event?.startIndex} to ${event.endIndex} -- contentHeight: ${this.agVirtualScroll['contentHeight']} currentScroll: ${this.agVirtualScroll['currentScroll']}`)
-    if(this.scrollToBottomOnLoad) {
+    if (this.scrollToBottomOnLoad) {
       const containerHeight = this.agVirtualScroll.el.clientHeight;
       const content = this.agVirtualScroll['contentHeight'];
       const scrollPos = this.agVirtualScroll['currentScroll'];
       const targetPos = scrollPos + containerHeight;
       // console.log(`containerHeight ${containerHeight}, targetPos ${targetPos}`);
 
-      if(targetPos <= content) {
+      if (targetPos <= content) {
         setTimeout(() => {
           this.agVirtualScroll.el.scrollTop = targetPos;
         })
@@ -116,6 +116,17 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     setTimeout(() => {
       adapter.reload(this.data.length - 1);
     }, 100)
+  }
+
+  scrollTo_ngxUiScroll() {
+    const { adapter } = this.ngxUIDataSource;
+    adapter.reload(700);
+  }
+
+  update_ngxUIScroll() {
+    this.data[700] = { index: 700, text: 'Hello, I am from India\nHello, I am from India\nHello, I am from India\nHello, I am from India' };
+    const { adapter } = this.ngxUIDataSource;
+    adapter.reload(700);
   }
 
   log(x: any) {
