@@ -47,7 +47,7 @@ cdk-virtual-scroll-viewport {
 .actions {
     margin-top: 20px;
     
-    button {
+    button, input {
         &:not(:last-child) {
             margin-right: 20px;
         }

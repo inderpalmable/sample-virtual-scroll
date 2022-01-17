@@ -5,7 +5,7 @@
   <div class="column">
     <h3>Ag Virtual Scroll</h3>
     <div class="content">
-      <ag-virtual-scroll *ngIf="dataLoaded; else loading" #vs [items]="data" height="70vh" [min-row-height]="40"
+      <!-- <ag-virtual-scroll *ngIf="dataLoaded; else loading" #vs [items]="data" height="70vh" [min-row-height]="40"
         class="box-border styledScroll" (onItemsRender)="onAgScroll_itemsRender($event)">
         <div class="row" *ngFor="let item of vs.items; let i = index">
           <div class="bubble">
@@ -14,7 +14,7 @@
             </span>
           </div>
         </div>
-      </ag-virtual-scroll>
+      </ag-virtual-scroll> -->
       <div class="dummyLoader" *ngIf="!agVirtualScrollInitialized">
         Loading...
       </div>
@@ -27,7 +27,7 @@
   <div class="column">
     <h3>Cdk Experimental</h3>
     <div class="content">
-      <cdk-virtual-scroll-viewport class="styledScroll" #cdkViewport autosize (scrolledIndexChange)="log($event)">
+      <cdk-virtual-scroll-viewport class="styledScroll" #cdkViewport autosize>
         <div class="row" *cdkVirtualFor="let item of data">
           <div class="bubble">
             <span>
@@ -56,8 +56,11 @@
       </div>
     </div>
     <div class="actions">
-      <button (click)="scrollTo_ngxUiScroll()">Scroll to 700</button>
-      <button (click)="update_ngxUIScroll()">Update 700</button>
+      <input type="number" placeholder="Index" #input [min]="0"/>
+      <button (click)="ngxUiScroll_ScrollTo(+input.value)">Scroll To</button>
+      <button (click)="ngxUiScroll_UpdateAt(+input.value)">Update At</button>
+      <button (click)="ngxUiScroll_DeleteAt(+input.value)">Delete At</button>
+      <button (click)="ngxUiScroll_LogBuffer()">Log Buffer</button>
     </div>
   </div>
 </div>
